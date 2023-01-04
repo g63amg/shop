@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    #send{width: 100px;height: 50px;line-height: 50px;text-align: center;border: 1px solid #666;border-radius: 3px;}
+</style>
+<script src="https://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="send">手机壳</div>
+</body>
+</html>
+<script>
+    $(function(){
+    $('#send').click(function(){
+         $.ajax({
+             type: "GET",
+             url: "test.json",
+             data: {username:$("#username").val(), content:$("#content").val()},
+             dataType: "json",
+             success: function(data){
+                         $('#resText').empty();   //清空resText里面的所有内容
+                         var html = ''; 
+                         $.each(data, function(commentIndex, comment){
+                               html += '<div class="comment"><h6>' + comment['username']
+                                         + ':</h6><p class="para"' + comment['content']
+                                         + '</p></div>';
+                         });
+                         $('#resText').html(html);
+                      }
+         });
+    });
+});
+</script>
